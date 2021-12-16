@@ -7,8 +7,10 @@ module.exports = async (user) => {
 
     const { insertedId: { id } } = await db.collection('users').insertOne(user);
 
+    const { password, ...userWithoutPassword } = user;
+
     const newUser = {
-      ...user,
+      ...userWithoutPassword,
       _id: ObjectId(id).toString(),
     }
 
