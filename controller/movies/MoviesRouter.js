@@ -1,9 +1,11 @@
 const express = require('express');
-const Create = require('./Create');
 const { CreateValidation } = require('../../middlewares/movies');
+const Create = require('./Create');
+const GetALl = require('./GetAll');
 
 const router = express.Router({ mergeParams: true });
 
+router.get('/', GetALl);
 router.post('/', CreateValidation, Create);
 
 module.exports = (root) => {
