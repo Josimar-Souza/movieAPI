@@ -20,7 +20,7 @@ module.exports = async (login) => {
     const user = await usersModel.GetByEmail(login.email);
 
     if (!user) return { isValid: false, status: StatusCodes.NOT_FOUND, message: 'Usuário não encontrado.' };
-    if (login.password !== user.password) return { isValid: false, status: StatusCodes.BAD_REQUEST, message: 'Senha incorreta!' };
+    if (login.password !== user.password) return { isValid: false, status: StatusCodes.UNPROCESSABLE_ENTITY, message: 'Senha incorreta!' };
 
     const { password, ...payload } = user;
 
