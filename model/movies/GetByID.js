@@ -7,7 +7,7 @@ module.exports = async (id) => {
 
     const movie = await db.collection('movies').find({ _id: ObjectId(id) }).toArray();
 
-    return movie;
+    return movie[0];
   } catch (error) {
     console.log(error);
   }
