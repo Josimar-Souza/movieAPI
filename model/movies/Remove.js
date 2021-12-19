@@ -5,9 +5,9 @@ module.exports = async (id) => {
   try {
     const db = await mongoConnection();
 
-    const movie = await db.collection('movies').find({ _id: ObjectId(id) }).toArray();
+    await db.collection('movies').deleteOne({ _id: ObjectId(id) });
 
-    return movie[0];
+    return;
   } catch (error) {
     console.log(error);
   }
