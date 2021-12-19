@@ -5,10 +5,17 @@ module.exports = async (newValues, id) => {
   try {
     const db = await mongoConnection();
 
-    const updatedMovie = await db.collection('movies').updateOne(
+    await db.collection('movies').updateOne(
       { _id: ObjectId(id) },
       {$set: newValues},
     );
+
+    const movie = await db.collection('movies').find({ _id: ObjectId(id) }).toArray();
+
+    const updatedMovie = {
+      ...movie[0],
+      ...newValues,
+    };
 
     return updatedMovie;
   } catch (error) {
